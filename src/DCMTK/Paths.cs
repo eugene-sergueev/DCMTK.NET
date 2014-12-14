@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DCMTK
 {
-    public class Class1
+    public class Paths
     {
+        public string DCMTKPath { get; set; }
     }
 }
