@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DCMTK
+namespace DCMTK.Fluent
 {
-    public class Paths
+    public interface ICommandBuilder
     {
-        public string DCMTKPath { get; set; }
     }
 }

@@ -39,7 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Paths.cs" />
+    <Compile Include="Fluent\EchoInstance.cs" />
+    <Compile Include="Proc\ValueOption.cs" />
+    <Compile Include="Proc\ICommandLineOption.cs" />
+    <Compile Include="Proc\Instance.cs" />
+    <Compile Include="DCMTK.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Fluent\EchoCommandBuilder.cs" />
+    <Compile Include="Fluent\ICommandBuilder.cs" />
+    <Compile Include="Proc\KeyValueOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
