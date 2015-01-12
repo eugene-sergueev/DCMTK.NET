@@ -22,7 +22,17 @@ namespace DCMTK
 
         public EchoCommandBuilder Echo(string peer, int port)
         {
-            return new EchoCommandBuilder(Path.Combine(_dcmtkBinDirectory, "echoscu.exe"), peer, port);
+            return new EchoCommandBuilder(GetExePath("echoscu"), peer, port);
+        }
+
+        public ImageToDCMCommandBuilder ImageToDCM(string input, string output)
+        {
+            return new ImageToDCMCommandBuilder(GetExePath("img2dcm"), input, output);
+        }
+
+        private string GetExePath(string exeName)
+        {
+            return Path.Combine(_dcmtkBinDirectory, exeName + ".exe");
         }
     }
 }

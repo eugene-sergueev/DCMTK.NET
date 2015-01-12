@@ -18,9 +18,9 @@ namespace DCMTK.Fluent
 
         }
 
-        public bool? Result { get; set; }
+        public bool? Result { get; private set; }
 
-        public string Reason { get; set; }
+        public string Reason { get; private set; }
 
         protected override void OnExited(object sender, EventArgs eventArgs)
         {

@@ -4,16 +4,22 @@ namespace DCMTK
 {
     public static class Extensions
     {
-        public static EchoCommandBuilder SetCallingAETitle(this EchoCommandBuilder echoCommandBuilder, string aeTitle)
+        public static EchoCommandBuilder SetCallingAETitle(this EchoCommandBuilder builder, string aeTitle)
         {
-            echoCommandBuilder.CallingAETitle = aeTitle;
-            return echoCommandBuilder;
+            builder.CallingAETitle = aeTitle;
+            return builder;
         }
 
-        public static EchoCommandBuilder SetCalledAETitle(this EchoCommandBuilder echoCommandBuilder, string aeTitle)
+        public static EchoCommandBuilder SetCalledAETitle(this EchoCommandBuilder builder, string aeTitle)
         {
-            echoCommandBuilder.CalledAETitle = aeTitle;
-            return echoCommandBuilder;
+            builder.CalledAETitle = aeTitle;
+            return builder;
+        }
+
+        public static ImageToDCMCommandBuilder SetInputFormat(this ImageToDCMCommandBuilder builder, ImageToDCMCommandBuilder.InputFormatEnum inputFormat)
+        {
+            builder.InputFormat = inputFormat;
+            return builder;
         }
     }
 }
