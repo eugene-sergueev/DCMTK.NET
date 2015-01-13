@@ -47,5 +47,25 @@ namespace DCMTK.Tests
             request.Wait();
             Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True, "Error message is " + request.ErrorMessage);
         }
+
+        [Test]
+        public void Can_get_error_message()
+        {
+            // arrange
+            var bmp = CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum.Jpeg);
+            var request = _dcmtk.StoreSCU("192.168.5.51", 5678, bmp)
+                .Set(x => x.CallingAETitle, "DRSHD")
+                .Set(x => x.CalledAETitle, "MedXChange")
+                // we need this to succesfully do a jpeg, so we will get an error
+                //.Set(x => x.ProposeJpeg8, true)
+                .Build();
+
+            // act
+            request.Start();
+
+            // assert
+            request.Wait();
+            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.False, "The error message should have data");
+        }
     }
 }
