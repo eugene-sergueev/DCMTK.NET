@@ -28,5 +28,23 @@ namespace DCMTK.Tests
             request.Wait();
             Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True);
         }
+
+        [Test]
+        public void Can_upload_jpeg_to_storage_server()
+        {
+            // arrange
+            var bmp = CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum.Jpeg);
+            var request = _dcmtk.StoreSCU("192.168.5.51", 5678, bmp)
+                .SetCallingAETitle("DRSHD")
+                .SetCalledAETitle("MedXChange")
+                .Build();
+
+            // act
+            request.Start();
+
+            // assert
+            request.Wait();
+            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True, "Error message is " + request.ErrorMessage);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using DCMTK.Proc;
 
 namespace DCMTK.Fluent
@@ -19,10 +20,22 @@ namespace DCMTK.Fluent
         {
             base.OnExited(sender, eventArgs);
             var fatal = new List<string>();
-            ParseOutput(_process.StandardOutput.ReadToEnd(), fatal, null, null, null);
-            if (fatal.Any())
+            var error = new List<string>();
+            var warning = new List<string>();
+            var other = new List<string>();
+            ParseOutput(_process.StandardOutput.ReadToEnd(), fatal, error, warning, other);
+            if (fatal.Any() || error.Any() || warning.Any() || other.Any())
             {
-                ErrorMessage = string.Join(" ", fatal.ToArray());
+                var errorMessage = new StringBuilder();
+                if (other.Any())
+                    errorMessage.AppendLine("Other (" + string.Join(",", other.Select(x => "[" + x + "]").ToArray()) + ")");
+                if (warning.Any())
+                    errorMessage.AppendLine("Warning (" + string.Join(",", warning.Select(x => "[" + x + "]").ToArray()) + ")");
+                if (error.Any())
+                    errorMessage.AppendLine("Error (" + string.Join(",", error.Select(x => "[" + x + "]").ToArray()) + ")");
+                if (fatal.Any())
+                    errorMessage.AppendLine("Fatal (" + string.Join(",", fatal.Select(x => "[" + x + "]").ToArray()) + ")");
+                ErrorMessage = errorMessage.ToString();
             }
         }
     }
