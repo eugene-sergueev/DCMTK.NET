@@ -8,7 +8,7 @@ using DCMTK.Proc;
 
 namespace DCMTK.Fluent
 {
-    public class ImageToDCMCommandBuilder
+    public class ImageToDCMCommandBuilder : ICommandBuilder
     {
         private readonly string _exePath;
         private readonly string _input;

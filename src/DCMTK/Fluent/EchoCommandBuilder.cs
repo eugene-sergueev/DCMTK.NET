@@ -5,7 +5,7 @@ using DCMTK.Proc;
 
 namespace DCMTK.Fluent
 {
-    public class EchoCommandBuilder
+    public class EchoCommandBuilder : ICommandBuilder
     {
         private readonly string _exePath;
         private readonly string _peer;

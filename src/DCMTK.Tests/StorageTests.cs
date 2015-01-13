@@ -17,8 +17,8 @@ namespace DCMTK.Tests
             // arrange
             var bmp = CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum.Bmp);
             var request = _dcmtk.StoreSCU("192.168.5.51", 5678, bmp)
-                .SetCallingAETitle("DRSHD")
-                .SetCalledAETitle("MedXChange")
+                .Set(x => x.CallingAETitle, "DRSHD")
+                .Set(x => x.CalledAETitle, "MedXChange")
                 .Build();
 
             // act
@@ -35,8 +35,9 @@ namespace DCMTK.Tests
             // arrange
             var bmp = CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum.Jpeg);
             var request = _dcmtk.StoreSCU("192.168.5.51", 5678, bmp)
-                .SetCallingAETitle("DRSHD")
-                .SetCalledAETitle("MedXChange")
+                .Set(x => x.CallingAETitle, "DRSHD")
+                .Set(x => x.CalledAETitle, "MedXChange")
+                .Set(x => x.ProposeJpeg8, true)
                 .Build();
 
             // act

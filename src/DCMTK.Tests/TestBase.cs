@@ -53,7 +53,7 @@ namespace DCMTK.Tests
         {
             var dcmFile = GetTemporaryResource("image.dcm");
             var request = _dcmtk.ImageToDCM(GetTestResource(inputFormat == ImageToDCMCommandBuilder.InputFormatEnum.Bmp ? "sampleStill.bmp" : "sampleStill.jpg"), dcmFile)
-                .SetInputFormat(inputFormat)
+                .Set(x => x.InputFormat, inputFormat)
                 .Build();
             request.Start();
             request.Wait();

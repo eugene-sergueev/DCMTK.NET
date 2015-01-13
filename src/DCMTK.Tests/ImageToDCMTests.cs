@@ -18,7 +18,7 @@ namespace DCMTK.Tests
             // arrange
             var dcmFile = GetTemporaryResource("sampleStill.dcm");
             var request = _dcmtk.ImageToDCM(GetTestResource("sampleStill.bmp"), dcmFile)
-                .SetInputFormat(ImageToDCMCommandBuilder.InputFormatEnum.Bmp)
+                .Set(x => x.InputFormat, ImageToDCMCommandBuilder.InputFormatEnum.Bmp)
                 .Build();
 
             // act
@@ -36,7 +36,7 @@ namespace DCMTK.Tests
             // arrange
             var dcmFile = GetTemporaryResource("sampleStill.dcm");
             var request = _dcmtk.ImageToDCM(GetTestResource("sampleStill.jpg"), dcmFile)
-                .SetInputFormat(ImageToDCMCommandBuilder.InputFormatEnum.Jpeg)
+                .Set(x => x.InputFormat, ImageToDCMCommandBuilder.InputFormatEnum.Jpeg)
                 .Build();
 
             // act
@@ -54,7 +54,7 @@ namespace DCMTK.Tests
             // arrange
             var dcmFile = GetTemporaryResource("sampleStill.dcm");
             var request = _dcmtk.ImageToDCM(GetTestResource("sampleStill.jpg"), dcmFile)
-                .SetInputFormat(ImageToDCMCommandBuilder.InputFormatEnum.Bmp) // this is not a bitmap, error will happen!
+                .Set(x => x.InputFormat, ImageToDCMCommandBuilder.InputFormatEnum.Bmp) // this is not a bitmap, error will happen!
                 .Build();
 
             // act

@@ -16,8 +16,8 @@ namespace DCMTK.Tests
         {
             // arrange
             var echoRequest = _dcmtk.Echo("pacs.medxchange.com", 5678)
-                .SetCallingAETitle("DRSHD")
-                .SetCalledAETitle("MedXChange")
+                .Set(x => x.CallingAETitle, "DRSHD")
+                .Set(x => x.CalledAETitle, "MedXChange")
                 .Build();
 
             // act
@@ -33,8 +33,8 @@ namespace DCMTK.Tests
         {
             // arrange
             var echoRequest = _dcmtk.Echo("pacs.medxchange.com", 5678)
-                .SetCallingAETitle("DRSHD2") // invalid!
-                .SetCalledAETitle("MedXChange")
+                .Set(x => x.CallingAETitle, "DRSHD2") // invalid!
+                .Set(x => x.CalledAETitle, "MedXChange")
                 .Build();
 
             // act
