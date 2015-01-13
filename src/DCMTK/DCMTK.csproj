@@ -45,6 +45,8 @@
     <Compile Include="Fluent\EchoInstance.cs" />
     <Compile Include="Fluent\ImageToDCMCommandBuilder.cs" />
     <Compile Include="Fluent\ImageToDCMInstance.cs" />
+    <Compile Include="Fluent\StoreSCUCommandBuilder.cs" />
+    <Compile Include="Fluent\StoreSCUInstance.cs" />
     <Compile Include="Proc\ValueOption.cs" />
     <Compile Include="Proc\ICommandLineOption.cs" />
     <Compile Include="Proc\Instance.cs" />

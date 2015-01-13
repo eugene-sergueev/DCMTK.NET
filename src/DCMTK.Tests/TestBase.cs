@@ -52,10 +52,12 @@ namespace DCMTK.Tests
         protected string CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum inputFormat)
         {
             var dcmFile = GetTemporaryResource("image.dcm");
-            var request = _dcmtk.ImageToDCM(GetTestResource(inputFormat == ImageToDCMCommandBuilder.InputFormatEnum.Bmp ? "sampleStill.bmp" : "sampleStill.jpg"), dcmFile).Build();
+            var request = _dcmtk.ImageToDCM(GetTestResource(inputFormat == ImageToDCMCommandBuilder.InputFormatEnum.Bmp ? "sampleStill.bmp" : "sampleStill.jpg"), dcmFile)
+                .SetInputFormat(inputFormat)
+                .Build();
             request.Start();
             request.Wait();
-            if (string.IsNullOrEmpty(request.ErrorMessage))
+            if (!string.IsNullOrEmpty(request.ErrorMessage))
                 throw new Exception("Couldn't create a dcm file");
             return dcmFile;
         }

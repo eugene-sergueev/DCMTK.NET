@@ -16,6 +16,17 @@ namespace DCMTK.Tests
         {
             // arrange
             var bmp = CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum.Bmp);
+            var request = _dcmtk.StoreSCU("192.168.5.51", 5678, bmp)
+                .SetCallingAETitle("DRSHD")
+                .SetCalledAETitle("MedXChange")
+                .Build();
+
+            // act
+            request.Start();
+
+            // assert
+            request.Wait();
+            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True);
         }
     }
 }

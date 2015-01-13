@@ -30,6 +30,11 @@ namespace DCMTK
             return new ImageToDCMCommandBuilder(GetExePath("img2dcm"), input, output);
         }
 
+        public StoreSCUCommandBuilder StoreSCU(string peer, int port, string file)
+        {
+            return new StoreSCUCommandBuilder(GetExePath("storescu"), peer, port, file);
+        }
+
         private string GetExePath(string exeName)
         {
             return Path.Combine(_dcmtkBinDirectory, exeName + ".exe");

@@ -21,5 +21,17 @@ namespace DCMTK
             builder.InputFormat = inputFormat;
             return builder;
         }
+
+        public static StoreSCUCommandBuilder SetCallingAETitle(this StoreSCUCommandBuilder builder, string aeTitle)
+        {
+            builder.CallingAETitle = aeTitle;
+            return builder;
+        }
+
+        public static StoreSCUCommandBuilder SetCalledAETitle(this StoreSCUCommandBuilder builder, string aeTitle)
+        {
+            builder.CalledAETitle = aeTitle;
+            return builder;
+        }
     }
 }
