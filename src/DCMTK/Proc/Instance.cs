@@ -16,6 +16,7 @@ namespace DCMTK.Proc
         private readonly object _lock = new object();
         private bool _isDisposed;
         private bool _isStarted;
+        private bool _isFinished;
 
         public Instance(string exePath, params ICommandLineOption[] options)
         {
@@ -43,11 +44,9 @@ namespace DCMTK.Proc
             _process.Exited += OnExited;
         }
 
-        public Instance(string exePath, IEnumerable<ICommandLineOption> options)
-            : this(exePath, options.ToArray())
-        {
+        public bool IsStarted { get { return _isStarted; } }
 
-        }
+        public bool IsFinished { get { return _isFinished; } }
 
         public void Start()
         {
@@ -63,7 +62,7 @@ namespace DCMTK.Proc
         {
             lock (_lock)
             {
-                if(!_isStarted) throw new Exception("You must start before you can stop");
+                if (!_isStarted) throw new Exception("You must start before you can stop");
                 _process.Kill();
             }
         }
@@ -91,29 +90,7 @@ namespace DCMTK.Proc
 
         protected virtual void OnExited(object sender, EventArgs eventArgs)
         {
-
-        }
-
-        protected void ParseOutput(string output, List<string> fatal, List<string> error, List<string> warning, List<string> other)
-        {
-            if (string.IsNullOrEmpty(output))
-                return;
-
-            foreach (var value in output.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
-            {
-                if (string.IsNullOrEmpty(value))
-                    continue;
-
-                if (value.StartsWith("F: ") && fatal != null)
-                    fatal.Add(value.Substring(3));
-                else if (value.StartsWith("E: ") && error != null)
-                    error.Add(value.Substring(3));
-                else if (value.StartsWith("W: ") && warning != null)
-                    warning.Add(value.Substring(3));
-                else if (other != null)
-                    other.Add(value);
-            }
-
+            _isFinished = true;
         }
     }
 }

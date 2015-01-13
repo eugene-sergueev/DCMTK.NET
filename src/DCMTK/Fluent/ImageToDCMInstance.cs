@@ -7,7 +7,7 @@ using DCMTK.Proc;
 
 namespace DCMTK.Fluent
 {
-    public class ImageToDCMInstance : Instance
+    public class ImageToDCMInstance : DCMTKInstance
     {
         public ImageToDCMInstance(string exePath, IEnumerable<ICommandLineOption> options)
             :base(exePath, options.ToArray())
@@ -15,16 +15,12 @@ namespace DCMTK.Fluent
             
         }
 
-        public string ErrorMessage { get; private set; }
-
-        protected override void OnExited(object sender, EventArgs eventArgs)
+        public bool WasConversionSuccesful
         {
-            base.OnExited(sender, eventArgs);
-            var fatal = new List<string>();
-            ParseOutput(_process.StandardOutput.ReadToEnd(), fatal, null, null, null);
-            if (fatal.Any())
+            get
             {
-                ErrorMessage = string.Join(" ", fatal.ToArray());
+                if (!IsFinished) return false;
+                return !OutputFatal.Any();
             }
         }
     }

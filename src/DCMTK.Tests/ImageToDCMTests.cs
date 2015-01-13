@@ -26,7 +26,7 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True);
+            Assert.That(request.WasConversionSuccesful, Is.True);
             Assert.That(File.Exists(dcmFile), Is.True);
         }
 
@@ -44,7 +44,7 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True);
+            Assert.That(request.WasConversionSuccesful, Is.True);
             Assert.That(File.Exists(dcmFile), Is.True);
         }
 
@@ -62,7 +62,9 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(request.ErrorMessage, Is.EqualTo("Error converting file: Not a BMP file - invalid header"));
+            Assert.That(request.WasConversionSuccesful, Is.False);
+            Assert.That(request.OutputFatal, Has.Count.EqualTo(1));
+            Assert.That(request.OutputFatal[0], Is.EqualTo("Error converting file: Not a BMP file - invalid header"));
         }
     }
 }

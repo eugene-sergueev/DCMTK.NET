@@ -26,7 +26,7 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True);
+            Assert.That(request.WasScoreSuccesful, Is.True);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.True, "Error message is " + request.ErrorMessage);
+            Assert.That(request.WasScoreSuccesful, Is.True);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace DCMTK.Tests
 
             // assert
             request.Wait();
-            Assert.That(string.IsNullOrEmpty(request.ErrorMessage), Is.False, "The error message should have data");
+            Assert.That(request.WasScoreSuccesful, Is.False);
         }
     }
 }

@@ -57,8 +57,8 @@ namespace DCMTK.Tests
                 .Build();
             request.Start();
             request.Wait();
-            if (!string.IsNullOrEmpty(request.ErrorMessage))
-                throw new Exception("Couldn't create a dcm file");
+            if(!request.WasConversionSuccesful)
+                request.ThrowException("Couldn't create the dcm file");
             return dcmFile;
         }
     }

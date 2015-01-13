@@ -13,7 +13,6 @@ namespace DCMTK.Fluent
         private readonly string _exePath;
         private readonly string _input;
         private readonly string _output;
-        private InputFormatEnum _inputFormat;
 
         public ImageToDCMCommandBuilder(string exePath, string input, string output)
         {
@@ -31,11 +30,7 @@ namespace DCMTK.Fluent
             _output = output;
         }
 
-        public InputFormatEnum InputFormat
-        {
-            get { return _inputFormat; }
-            set { _inputFormat = value; }
-        }
+        public InputFormatEnum InputFormat { get; set; }
 
         public ImageToDCMInstance Build()
         {
