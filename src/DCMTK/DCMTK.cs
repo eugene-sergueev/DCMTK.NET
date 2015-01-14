@@ -35,6 +35,11 @@ namespace DCMTK
             return new StoreSCUCommandBuilder(GetExePath("storescu"), peer, port, file);
         }
 
+        public DcmToXmlCommandBuilder DcmToXml(string input, string output)
+        {
+            return new DcmToXmlCommandBuilder(GetExePath("dcm2xml"), input, output);
+        }
+
         private string GetExePath(string exeName)
         {
             return Path.Combine(_dcmtkBinDirectory, exeName + ".exe");

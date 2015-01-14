@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DICOM\UidType.cs" />
+    <Compile Include="Fluent\DcmToXmlCommandBuilder.cs" />
     <Compile Include="Proc\DCMTKInstance.cs" />
     <Compile Include="Fluent\EchoInstance.cs" />
     <Compile Include="Fluent\ImageToDCMCommandBuilder.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="Fluent\StoreSCUCommandBuilder.cs" />
     <Compile Include="Fluent\StoreSCUInstance.cs" />
     <Compile Include="Proc\DCMTKInstanceException.cs" />
+    <Compile Include="Fluent\DcmToXmlInstance.cs" />
     <Compile Include="Proc\ValueOption.cs" />
     <Compile Include="Proc\ICommandLineOption.cs" />
     <Compile Include="Proc\Instance.cs" />
@@ -58,6 +60,18 @@
     <Compile Include="Fluent\ICommandBuilder.cs" />
     <Compile Include="Proc\KeyValueOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\dcm2xml.cs">
+      <DependentUpon>dcm2xml.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Serialization\Serializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Serialization\dcm2xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Serialization\dsr2xml.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

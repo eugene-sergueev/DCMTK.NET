@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<xs:schema xmlns="http://tempuri.org/dcm2xml" elementFormDefault="qualified" targetNamespace="http://tempuri.org/dcm2xml" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="file-format">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="meta-header" />
+        <xs:element ref="data-set" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="meta-header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="unbounded" ref="element" />
+      </xs:sequence>
+      <xs:attribute name="xfer" type="xs:NMTOKEN" use="required" />
+      <xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="data-set">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="element" />
+        <xs:element ref="sequence" />
+      </xs:choice>
+      <xs:attribute name="xfer" type="xs:NMTOKEN" use="required" />
+      <xs:attribute name="name" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="element">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute default="no" name="binary">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="yes" />
+                <xs:enumeration value="no" />
+                <xs:enumeration value="hidden" />
+                <xs:enumeration value="base64" />
+                <xs:enumeration value="file" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="len" type="xs:NMTOKEN" />
+          <xs:attribute default="yes" name="loaded">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="yes" />
+                <xs:enumeration value="no" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attribute name="tag" type="xs:string" use="required" />
+          <xs:attribute name="vm" type="xs:NMTOKEN" />
+          <xs:attribute name="vr" type="xs:NMTOKEN" use="required" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sequence">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="item" />
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="pixel-item" />
+      </xs:choice>
+      <xs:attribute name="card" type="xs:NMTOKEN" />
+      <xs:attribute name="len" type="xs:NMTOKEN" />
+      <xs:attribute name="name" type="xs:string" />
+      <xs:attribute name="tag" type="xs:string" use="required" />
+      <xs:attribute name="vr" type="xs:NMTOKEN" use="required" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="cdata" type="xs:string"/>
+  <xs:element name="item">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="element" />
+        <xs:element ref="sequence" />
+      </xs:choice>
+      <xs:attribute name="card" type="xs:NMTOKEN" />
+      <xs:attribute name="len" type="xs:NMTOKEN" />
+      <xs:attribute name="offset" type="xs:NMTOKEN" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pixel-item">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="cdata" />
+      </xs:sequence>
+      <xs:attribute default="yes" name="binary">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="yes" />
+            <xs:enumeration value="hidden" />
+            <xs:enumeration value="base64" />
+            <xs:enumeration value="file" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="len" type="xs:NMTOKEN" />
+      <xs:attribute default="yes" name="loaded">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="yes" />
+            <xs:enumeration value="no" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
