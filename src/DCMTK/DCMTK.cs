@@ -40,6 +40,11 @@ namespace DCMTK
             return new DcmToXmlCommandBuilder(GetExePath("dcm2xml"), input, output);
         }
 
+        public XmlToDcmCommandBuilder XmlToDcm(string input, string output)
+        {
+            return new XmlToDcmCommandBuilder(GetExePath("xml2dcm"), input, output);
+        }
+
         private string GetExePath(string exeName)
         {
             return Path.Combine(_dcmtkBinDirectory, exeName + ".exe");

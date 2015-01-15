@@ -32,5 +32,24 @@ namespace DCMTK.Tests
             Assert.That(deserialized, Is.Not.Null);
             Assert.That(deserialized.metaheader.name, Is.EqualTo("Little Endian Explicit"));
         }
+
+        [Test]
+        public void Can_convert_xml_to_dcm()
+        {
+            // arrange
+            var xml = File.ReadAllText(GetTestResource("test.xml")).XmlDeserializeFromString<fileformat>();
+            var xmlFile = GetTemporaryResource("test.xml");
+            var dcmFile = GetTemporaryResource("test.dcm");
+            xml.XmlSerializeToFile(xmlFile);
+            var request = _dcmtk.XmlToDcm(xmlFile, dcmFile).Build();
+
+            // act
+            request.Start();
+
+            // assert
+            request.Wait();
+            Assert.That(request.WasSuccessful, Is.True, request.Output);
+            Assert.That(File.Exists(request.OutputFile), Is.True);
+        }
     }
 }

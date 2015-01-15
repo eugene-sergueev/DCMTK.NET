@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DICOM\UidType.cs" />
     <Compile Include="Fluent\DcmToXmlCommandBuilder.cs" />
+    <Compile Include="Fluent\XmlToDcmInstance.cs" />
+    <Compile Include="Fluent\XmlToDcmCommandBuilder.cs" />
     <Compile Include="Proc\DCMTKInstance.cs" />
     <Compile Include="Fluent\EchoInstance.cs" />
     <Compile Include="Fluent\ImageToDCMCommandBuilder.cs" />

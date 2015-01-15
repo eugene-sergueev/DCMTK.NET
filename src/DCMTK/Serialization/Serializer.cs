@@ -23,6 +23,15 @@ namespace DCMTK.Serialization
             return sb.ToString();
         }
 
+        public static void XmlSerializeToFile(this object objectInstance, string file)
+        {
+            var writer = new XmlSerializer(objectInstance.GetType());
+
+            var fileWriter = new System.IO.StreamWriter(file);
+            writer.Serialize(fileWriter, objectInstance);
+            fileWriter.Close();
+        }
+
         public static T XmlDeserializeFromString<T>(this string objectData)
         {
             return (T)XmlDeserializeFromString(objectData, typeof(T));
