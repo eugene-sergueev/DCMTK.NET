@@ -7,8 +7,6 @@ namespace DCMTK.Proc
 {
     public class DCMTKInstance : Instance
     {
-        private string _output;
-
         public DCMTKInstance(string exePath, params ICommandLineOption[] options)
             : base(exePath, options)
         {
@@ -22,11 +20,11 @@ namespace DCMTK.Proc
         {
             base.OnExited(sender, eventArgs);
 
-            _output = _process.StandardOutput.ReadToEnd();
+            Output = _process.StandardOutput.ReadToEnd();
 
-            if (!string.IsNullOrEmpty(_output))
+            if (!string.IsNullOrEmpty(Output))
             {
-                foreach (var value in _output.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                foreach (var value in Output.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
                 {
                     if (string.IsNullOrEmpty(value))
                         continue;
@@ -55,7 +53,7 @@ namespace DCMTK.Proc
 
         public void ThrowException(string message)
         {
-            throw new DCMTKInstanceException(message, _output, OutputFatal, OutputError, OutputWarning, OutputOther);
+            throw new DCMTKInstanceException(message, Output, OutputFatal, OutputError, OutputWarning, OutputOther);
         }
     }
 }

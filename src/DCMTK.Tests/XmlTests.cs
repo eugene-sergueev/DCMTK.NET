@@ -41,7 +41,7 @@ namespace DCMTK.Tests
             var xmlFile = GetTemporaryResource("test.xml");
             var dcmFile = GetTemporaryResource("test.dcm");
             xml.XmlSerializeToFile(xmlFile);
-            var request = _dcmtk.XmlToDcm(xmlFile, dcmFile).Build();
+            var request = _dcmtk.XmlToDcm(GetTestResource("test.xml"), dcmFile).Build();
 
             // act
             request.Start();

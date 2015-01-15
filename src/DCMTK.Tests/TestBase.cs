@@ -5,7 +5,9 @@ using System.Linq;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using DCMTK.DICOM;
 using DCMTK.Fluent;
+using DCMTK.Serialization;
 using NUnit.Framework;
 
 namespace DCMTK.Tests
@@ -59,6 +61,29 @@ namespace DCMTK.Tests
             request.Wait();
             if(!request.WasConversionSuccesful)
                 request.ThrowException("Couldn't create the dcm file");
+            return dcmFile;
+        }
+
+        protected string CreateSampleDCMFile(Action<fileformat> modifier)
+        {
+            var xmlFile = GetTemporaryResource(Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".xml");
+            var dcmFile = GetTemporaryResource(Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".dcm");
+
+            var xml = new fileformat();
+            xml.metaheader = new metaheader();
+            xml.dataset = new dataset();
+            xml.dataset.name = "JPEG Baseline";
+            xml.dataset.xfer = "1.2.840.10008.1.2.4.50";
+
+            modifier(xml);
+           
+            xml.XmlSerializeToFile(xmlFile);
+
+            var request = _dcmtk.XmlToDcm(xmlFile, dcmFile).Build();
+            request.Start();
+            request.Wait();
+            Assert.That(File.Exists(dcmFile), Is.True, request.Output);
+
             return dcmFile;
         }
     }

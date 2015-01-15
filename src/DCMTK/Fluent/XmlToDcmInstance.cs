@@ -22,7 +22,7 @@ namespace DCMTK.Fluent
         protected override void OnExited(object sender, EventArgs eventArgs)
         {
             base.OnExited(sender, eventArgs);
-            WasSuccessful = string.IsNullOrEmpty(Output);
+            WasSuccessful = !OutputError.Any();
         }
     }
 }

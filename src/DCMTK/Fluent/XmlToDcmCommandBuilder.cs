@@ -40,6 +40,10 @@ namespace DCMTK.Fluent
         {
             var commands = new List<ICommandLineOption>();
 
+            //commands.Add(ValueOption.Build("--ignore-meta-info"));
+
+            commands.Add(ValueOption.Build("--verbose --debug --ignore-meta-info"));
+
             commands.Add(ValueOption.Build(_input));
             commands.Add(ValueOption.Build(_output));
 
