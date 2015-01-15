@@ -58,11 +58,16 @@ namespace DCMTK.Tests
         {
             // arrange
             var sopInstanceId = DicomUid.GenerateUid().UID;
+            var studyInstanceId = DicomUid.GenerateUid().UID;
+            var seriesInstanceId = DicomUid.GenerateUid().UID;
             var dcmFile = GetTemporaryResource("sampleStill.dcm");
             var request = _dcmtk.ImageToDCM(GetTestResource("sampleStill.jpg"), dcmFile)
                 .Set(x => x.InputFormat, ImageToDCMCommandBuilder.InputFormatEnum.Jpeg)
                 .AddKey("PatientID", "testid")
+                .AddKey("ImplementationVersionName", "test 1.3")
                 .AddKey("SOPInstanceUID", sopInstanceId)
+                .AddKey("StudyInstanceUID", studyInstanceId)
+                .AddKey("SeriesInstanceUID", seriesInstanceId)
                 .Build();
 
             // act
@@ -78,15 +83,25 @@ namespace DCMTK.Tests
             dcmToFileRequest.Wait();
             Assert.IsTrue(dcmToFileRequest.WasSuccessful);
             var xml = File.ReadAllText(xmlfile).XmlDeserializeFromString<fileformat>();
+
+            // ReSharper disable PossibleNullReferenceException
+
             var sopElement = (element)xml.dataset.Items.FirstOrDefault(x => x is element && ((element) x).name == "SOPInstanceUID");
             Assert.That(sopElement, Is.Not.Null.Or.Empty);
-            // ReSharper disable PossibleNullReferenceException
             Assert.That(sopElement.Value, Is.EqualTo(sopInstanceId));
-            // ReSharper restore PossibleNullReferenceException
-            var patientIdElement = (element)xml.dataset.Items.FirstOrDefault(x => x is element && ((element)x).name == "PatientID");
-            Assert.That(patientIdElement, Is.Not.Null.Or.Empty);
-            // ReSharper disable PossibleNullReferenceException
-            Assert.That(patientIdElement.Value, Is.EqualTo("testid"));
+
+            var studyInstanceIdElement = (element)xml.dataset.Items.FirstOrDefault(x => x is element && ((element)x).name == "StudyInstanceUID");
+            Assert.That(studyInstanceIdElement, Is.Not.Null.Or.Empty);
+            Assert.That(studyInstanceIdElement.Value, Is.EqualTo(studyInstanceId));
+
+            var seriesInstanceIdElement = (element)xml.dataset.Items.FirstOrDefault(x => x is element && ((element)x).name == "SeriesInstanceUID");
+            Assert.That(seriesInstanceIdElement, Is.Not.Null.Or.Empty);
+            Assert.That(seriesInstanceIdElement.Value, Is.EqualTo(seriesInstanceId));
+
+            var implementationNameElement = (element)xml.dataset.Items.FirstOrDefault(x => x is element && ((element)x).name == "ImplementationVersionName");
+            Assert.That(implementationNameElement, Is.Not.Null.Or.Empty);
+            Assert.That(implementationNameElement.Value, Is.EqualTo("test 1.3"));
+
             // ReSharper restore PossibleNullReferenceException
         }
 
