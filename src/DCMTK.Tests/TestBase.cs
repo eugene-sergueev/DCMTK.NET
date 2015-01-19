@@ -51,12 +51,14 @@ namespace DCMTK.Tests
             return Path.Combine(_tempDirectory, resource);
         }
 
-        protected string CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum inputFormat)
+        protected string CreateSampleDCMImage(ImageToDCMCommandBuilder.InputFormatEnum inputFormat, Action<ImageToDCMCommandBuilder> modifier = null)
         {
-            var dcmFile = GetTemporaryResource("image.dcm");
-            var request = _dcmtk.ImageToDCM(GetTestResource(inputFormat == ImageToDCMCommandBuilder.InputFormatEnum.Bmp ? "sampleStill.bmp" : "sampleStill.jpg"), dcmFile)
-                .Set(x => x.InputFormat, inputFormat)
-                .Build();
+            var dcmFile = GetTemporaryResource(Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".dcm");
+            var builder = _dcmtk.ImageToDCM(GetTestResource(inputFormat == ImageToDCMCommandBuilder.InputFormatEnum.Bmp ? "sampleStill.bmp" : "sampleStill.jpg"), dcmFile)
+                .Set(x => x.InputFormat, inputFormat);
+            if(modifier != null)
+                modifier(builder);
+            var request = builder.Build();
             request.Start();
             request.Wait();
             if(!request.WasConversionSuccesful)
