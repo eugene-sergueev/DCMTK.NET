@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace DCMTK.Fluent
 
             if(!File.Exists(file))
                 throw new Exception(string.Format("The path '{0}' doesn't exist.", file));
+
+            if(string.IsNullOrEmpty(peer))
+                throw new ArgumentNullException("peer");
+
+            if(port <= 0)
+                throw new ArgumentOutOfRangeException("port");
 
             _exePath = exePath;
             _peer = peer;

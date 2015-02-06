@@ -16,14 +16,14 @@ namespace DCMTK.Tests
     public class TestBase
     {
         // ReSharper disable InconsistentNaming
-        protected DCMTK _dcmtk;
+        protected DCMTKContext _dcmtk;
         // ReSharper restore InconsistentNaming
         private string _tempDirectory;
 
         [SetUp]
         public virtual void Setup()
         {
-            _dcmtk = new DCMTK(Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"\..\..\..\..\libs\dcmtk-3.6.0-win32-i386\bin"));
+            _dcmtk = new DCMTKContext(Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"\..\..\..\..\libs\dcmtk-3.6.0-win32-i386\bin"));
             _tempDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
             if(!Directory.Exists(_tempDirectory))
                 Directory.CreateDirectory(_tempDirectory);

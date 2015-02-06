@@ -31,17 +31,11 @@ namespace DCMTK.Proc
                     command.Append(" ");
             }
 
-            _process = new Process
-            {
-                StartInfo = new ProcessStartInfo(exePath, command.ToString())
-                {
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true
-                }
-            };
-            _process.EnableRaisingEvents = true;
-            _process.Exited += OnExited;
+            var startInfo = new ProcessStartInfo(exePath, command.ToString());
+            ConfigureStartInfo(startInfo);
+
+            _process = new Process { StartInfo = startInfo };
+            ConfigureProcess(_process);
         }
 
         public bool IsStarted { get { return _isStarted; } }
@@ -55,6 +49,7 @@ namespace DCMTK.Proc
                 if (_isStarted) return;
                 _isStarted = true;
                 _process.Start();
+                StartedProcess();
             }
         }
 
@@ -91,6 +86,24 @@ namespace DCMTK.Proc
         protected virtual void OnExited(object sender, EventArgs eventArgs)
         {
             _isFinished = true;
+        }
+
+        protected virtual void ConfigureStartInfo(ProcessStartInfo processStartInfo)
+        {
+            processStartInfo.UseShellExecute = false;
+            processStartInfo.CreateNoWindow = true;
+            processStartInfo.RedirectStandardOutput = true;
+        }
+
+        protected virtual void ConfigureProcess(Process process)
+        {
+            process.EnableRaisingEvents = true;
+            process.Exited += OnExited;
+        }
+
+        protected virtual void StartedProcess()
+        {
+            
         }
     }
 }

@@ -14,7 +14,7 @@ namespace DCMTK.Fluent
         private readonly string _input;
         private readonly string _output;
         private readonly Dictionary<string, string> _keys = new Dictionary<string, string>();
-        private object _lock = new object();
+        private readonly object _lock = new object();
 
         public ImageToDCMCommandBuilder(string exePath, string input, string output)
         {

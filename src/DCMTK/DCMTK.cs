@@ -8,11 +8,11 @@ using DCMTK.Fluent;
 
 namespace DCMTK
 {
-    public class DCMTK
+    public class DCMTKContext
     {
         private readonly string _dcmtkBinDirectory;
 
-        public DCMTK(string dcmtkBinDirectory)
+        public DCMTKContext(string dcmtkBinDirectory)
         {
             if(!Directory.Exists(dcmtkBinDirectory))
                 throw new Exception(string.Format("The bin directory '{0}' for dcmtk doesn't exist.", dcmtkBinDirectory));
@@ -43,6 +43,11 @@ namespace DCMTK
         public XmlToDcmCommandBuilder XmlToDcm(string input, string output)
         {
             return new XmlToDcmCommandBuilder(GetExePath("xml2dcm"), input, output);
+        }
+
+        public FindSCUCommandBuilder Find(string peer, int port)
+        {
+            return new FindSCUCommandBuilder(GetExePath("findscu"), peer, port);
         }
 
         private string GetExePath(string exeName)
