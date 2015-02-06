@@ -18,7 +18,18 @@ namespace DCMTK.Tests
                 .Set(x => x.CalledAETitle, "MedXChange")
                 .AddKey("PatientName", "")
                 .AddKey("PatientID", "")
-                .AddKey("StudyInstanceUID", "*")
+                .AddKey("StudyInstanceUID", "")
+                .AddKey("AccessionNumber", "")
+                .AddKey("ScheduledProcedureStepSequence[0].ScheduledStationAETitle", "")
+                .AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate", "")
+                .AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartTime", "")
+                .AddKey("ScheduledProcedureStepSequence[0].Modality", "")
+                .AddKey("ScheduledProcedureStepSequence[0].ScheduledStationName", "")
+                .AddKey("ReferringPhysicianName", "")
+                .AddKey("PatientBirthDate", "")
+                .AddKey("PatientSex", "")
+                .AddKey("RequestedProcedureID", "")
+                .AddKey("RequestedProcedureDescription", "")
                 .Build();
 
             // act

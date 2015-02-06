@@ -32,8 +32,6 @@ namespace DCMTK.Fluent
         {
             if(string.IsNullOrEmpty(e.Data)) return;
 
-            Console.WriteLine(e.Data);
-
             if (e.Data.StartsWith("F: "))
             {
                 _fatalErrors.Add(e.Data.Substring(3));
