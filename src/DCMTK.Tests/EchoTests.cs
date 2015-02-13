@@ -15,7 +15,7 @@ namespace DCMTK.Tests
         public void Can_performe_valid_echo()
         {
             // arrange
-            var echoRequest = _dcmtk.Echo("pacs.medxchange.com", 5678)
+            var echoRequest = _dcmtk.Echo("192.168.5.51", 5678)
                 .Set(x => x.CallingAETitle, "DRSHD")
                 .Set(x => x.CalledAETitle, "MedXChange")
                 .Build();

@@ -15,14 +15,18 @@ namespace DCMTK.Tests
             // arrange
             var request = _dcmtk.Find("192.168.5.51", 5678)
                 .Set(x => x.CallingAETitle, "DRSHD")
-                .Set(x => x.CalledAETitle, "MedXChange")
+                .Set(x => x.CalledAETitle, "DRSHD")
                 .AddKey("PatientName", "")
                 .AddKey("PatientID", "")
                 .AddKey("StudyInstanceUID", "")
                 .AddKey("AccessionNumber", "")
                 .AddKey("ScheduledProcedureStepSequence[0].ScheduledStationAETitle", "")
-                .AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate", "")
-                .AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartTime", "")
+
+                //.AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate", "20150205-20150207")
+                ////.AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate", "20150206")
+                ////.AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate", "20150205")
+
+                ////.AddKey("ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartTime", "")
                 .AddKey("ScheduledProcedureStepSequence[0].Modality", "")
                 .AddKey("ScheduledProcedureStepSequence[0].ScheduledStationName", "")
                 .AddKey("ReferringPhysicianName", "")

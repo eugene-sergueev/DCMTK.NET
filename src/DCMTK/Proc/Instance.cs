@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Remoting;
 using System.Text;
+using System.Threading;
 
 namespace DCMTK.Proc
 {
@@ -17,6 +18,7 @@ namespace DCMTK.Proc
         private bool _isDisposed;
         private bool _isStarted;
         private bool _isFinished;
+        private ManualResetEvent _exitedFinished = new ManualResetEvent(false);
 
         public Instance(string exePath, params ICommandLineOption[] options)
         {
@@ -35,6 +37,9 @@ namespace DCMTK.Proc
             ConfigureStartInfo(startInfo);
 
             _process = new Process { StartInfo = startInfo };
+
+            Trace.WriteLine("Command is...");
+            Trace.WriteLine(exePath + " " + startInfo.Arguments);
             ConfigureProcess(_process);
         }
 
@@ -67,8 +72,7 @@ namespace DCMTK.Proc
             lock (_lock)
             {
                 if (!_isStarted) throw new Exception("The instance must be started before you can wait on it");
-                if (_process.HasExited) return;
-                _process.WaitForExit();
+                _exitedFinished.WaitOne();
             }
         }
 
@@ -78,14 +82,27 @@ namespace DCMTK.Proc
             {
                 if (_isDisposed) return;
                 _isDisposed = true;
-                _process.Exited -= OnExited;
+                _process.Exited -= InternalOnExited;
                 _process.Dispose();
+            }
+        }
+
+        private void InternalOnExited(object sender, EventArgs eventArgs)
+        {
+            try
+            {
+                OnExited(sender, eventArgs);
+            }
+            finally
+            {
+                _isFinished = true;
+                _exitedFinished.Set();
             }
         }
 
         protected virtual void OnExited(object sender, EventArgs eventArgs)
         {
-            _isFinished = true;
+            
         }
 
         protected virtual void ConfigureStartInfo(ProcessStartInfo processStartInfo)
@@ -98,7 +115,7 @@ namespace DCMTK.Proc
         protected virtual void ConfigureProcess(Process process)
         {
             process.EnableRaisingEvents = true;
-            process.Exited += OnExited;
+            process.Exited += InternalOnExited;
         }
 
         protected virtual void StartedProcess()
