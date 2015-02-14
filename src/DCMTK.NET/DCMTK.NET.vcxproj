@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{ED1AD62F-B503-477E-9739-9695C083A889}</ProjectGuid>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>DCMTKNET</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CLRSupport>true</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>..\..\libs\dcmtk-3.6.0-win32\all-dependencies\lib\$(Configuration);..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\zlib-1.2.5\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\tiff-3.9.4\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\openssl-1.0.0c\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\libxml2-2.7.7\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\libpng-1.4.3\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>..\..\libs\dcmtk-3.6.0-win32\all-dependencies\lib\$(Configuration);..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\zlib-1.2.5\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\tiff-3.9.4\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\openssl-1.0.0c\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\libxml2-2.7.7\lib;..\..\libs\dcmtk-3.6.0-win32\all-dependencies\support_MD\libpng-1.4.3\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\libs\dcmtk-3.6.0-win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>..\..\libs\dcmtk-3.6.0-win32\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="Test.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
