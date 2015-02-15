@@ -61,6 +61,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/NOENTRY %(AdditionalOptions)</AdditionalOptions>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,6 +75,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/NOENTRY %(AdditionalOptions)</AdditionalOptions>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
