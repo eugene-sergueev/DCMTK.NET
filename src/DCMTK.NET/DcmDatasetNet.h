@@ -8,38 +8,41 @@
 #include "dcmtk/dcmnet/diutil.h"
 #include "dcmtk/dcmdata/dcsequen.h"
 
-public ref class DcmDatasetNet
+namespace DCMTK
 {
-public:
-
-	OFConditionNet^ FindAndGetString(DcmTagKeyNet^ tagKey, unsigned long position, bool searchIntoSub, [System::Runtime::InteropServices::Out] System::String^% result)
+	public ref class DcmDatasetNet
 	{
-		result = nullptr;
-		OFString string;
+	public:
 
-		OFCondition cond = _dataSet->findAndGetOFString(tagKey->GetUnmanagedType(), string, 0, searchIntoSub);
-		if (cond.good())
-			result = gcnew System::String(string.c_str());
+		OFConditionNet^ FindAndGetString(DcmTagKeyNet^ tagKey, unsigned long position, bool searchIntoSub, [System::Runtime::InteropServices::Out] System::String^% result)
+		{
+			result = nullptr;
+			OFString string;
 
-		return gcnew OFConditionNet(cond);
-	}
+			OFCondition cond = _dataSet->findAndGetOFString(tagKey->GetUnmanagedType(), string, 0, searchIntoSub);
+			if (cond.good())
+				result = gcnew System::String(string.c_str());
 
-internal:
-	DcmDatasetNet(DcmDataset* dataSet)
-		:_dataSet(NULL)
-	{
-		_dataSet = dataSet;
-	}
-private:
-	DcmDataset* _dataSet;
+			return gcnew OFConditionNet(cond);
+		}
 
-	~DcmDatasetNet()
-	{
-		this->!DcmDatasetNet();
-	}
+	internal:
+		DcmDatasetNet(DcmDataset* dataSet)
+			:_dataSet(NULL)
+		{
+			_dataSet = dataSet;
+		}
+	private:
+		DcmDataset* _dataSet;
 
-	!DcmDatasetNet()
-	{
-		
-	}
-};
+		~DcmDatasetNet()
+		{
+			this->!DcmDatasetNet();
+		}
+
+		!DcmDatasetNet()
+		{
+
+		}
+	};
+}

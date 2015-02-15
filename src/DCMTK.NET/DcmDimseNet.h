@@ -1,6 +1,9 @@
 #pragma once
 
-public enum class DIMSE_BlockingMode {
-	DIMSE_BLOCKING,
-	DIMSE_NONBLOCKING
-};
+namespace DCMTK
+{
+	public enum class DIMSE_BlockingMode {
+		DIMSE_BLOCKING,
+		DIMSE_NONBLOCKING
+	};
+}

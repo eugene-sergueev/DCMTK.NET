@@ -1,7 +1,11 @@
 #pragma once
-public ref class OFListNet
+
+namespace DCMTK
 {
-public:
-	OFListNet();
-};
+	public ref class OFListNet
+	{
+	public:
+		OFListNet();
+	};
+}
 

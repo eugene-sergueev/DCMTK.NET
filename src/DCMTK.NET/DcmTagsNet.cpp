@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "DcmTagsNet.h"
 
-
-DcmTagsNet::DcmTagsNet()
+namespace DCMTK
 {
+	DcmTagsNet::DcmTagsNet()
+	{
+	}
 }

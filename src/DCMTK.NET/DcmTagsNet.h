@@ -1,7 +1,10 @@
 #pragma once
-public ref class DcmTagsNet
+namespace DCMTK
 {
-public:
-	DcmTagsNet();
-};
+	public ref class DcmTagsNet
+	{
+	public:
+		DcmTagsNet();
+	};
+}
 

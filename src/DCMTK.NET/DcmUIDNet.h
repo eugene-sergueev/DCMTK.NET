@@ -2,15 +2,17 @@
 
 #include "dcmtk\dcmdata\dcuid.h"
 
-public ref class DcmUIDNet
+namespace DCMTK
 {
-public:
-	static property System::String^ FINDModalityWorklistInformationModel
+	public ref class DcmUIDNet
 	{
-		System::String^ get()
+	public:
+		static property System::String^ FINDModalityWorklistInformationModel
 		{
-			return gcnew System::String(UID_FINDModalityWorklistInformationModel);
+			System::String^ get()
+			{
+				return gcnew System::String(UID_FINDModalityWorklistInformationModel);
+			}
 		}
-	}
-};
-
+	};
+}

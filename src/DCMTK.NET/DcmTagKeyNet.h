@@ -2,164 +2,166 @@
 
 #include "dcmtk\dcmdata\dcdeftag.h"
 
-public ref class DcmTagKeyNet
+namespace DCMTK
 {
-public:
-
-	static property DcmTagKeyNet^ PatientName
+	public ref class DcmTagKeyNet
 	{
-		DcmTagKeyNet^ get()
+	public:
+
+		static property DcmTagKeyNet^ PatientName
 		{
-			return gcnew DcmTagKeyNet(&DCM_PatientName);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_PatientName);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledPerformingPhysicianName
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledPerformingPhysicianName
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledPerformingPhysicianName);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledPerformingPhysicianName);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ PatientID
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ PatientID
 		{
-			return gcnew DcmTagKeyNet(&DCM_PatientID);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_PatientID);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ StudyInstanceUID
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ StudyInstanceUID
 		{
-			return gcnew DcmTagKeyNet(&DCM_StudyInstanceUID);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_StudyInstanceUID);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ AccessionNumber
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ AccessionNumber
 		{
-			return gcnew DcmTagKeyNet(&DCM_AccessionNumber);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_AccessionNumber);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledStationAETitle
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledStationAETitle
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledStationAETitle);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledStationAETitle);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledProcedureStepStartDate
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledProcedureStepStartDate
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepStartDate);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepStartDate);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledProcedureStepStartTime
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledProcedureStepStartTime
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepStartTime);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepStartTime);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ Modality
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ Modality
 		{
-			return gcnew DcmTagKeyNet(&DCM_Modality);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_Modality);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledStationName
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledStationName
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledStationName);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledStationName);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ReferringPhysicianName
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ReferringPhysicianName
 		{
-			return gcnew DcmTagKeyNet(&DCM_ReferringPhysicianName);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ReferringPhysicianName);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ PatientBirthDate
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ PatientBirthDate
 		{
-			return gcnew DcmTagKeyNet(&DCM_PatientBirthDate);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_PatientBirthDate);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ PatientSex
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ PatientSex
 		{
-			return gcnew DcmTagKeyNet(&DCM_PatientSex);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_PatientSex);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ RequestedProcedureID
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ RequestedProcedureID
 		{
-			return gcnew DcmTagKeyNet(&DCM_RequestedProcedureID);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_RequestedProcedureID);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ RequestedProcedureDescription
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ RequestedProcedureDescription
 		{
-			return gcnew DcmTagKeyNet(&DCM_RequestedProcedureDescription);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_RequestedProcedureDescription);
+			}
 		}
-	}
 
-	static property DcmTagKeyNet^ ScheduledProcedureStepSequence
-	{
-		DcmTagKeyNet^ get()
+		static property DcmTagKeyNet^ ScheduledProcedureStepSequence
 		{
-			return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepSequence);
+			DcmTagKeyNet^ get()
+			{
+				return gcnew DcmTagKeyNet(&DCM_ScheduledProcedureStepSequence);
+			}
 		}
-	}
-	
-internal:
 
-	DcmTagKeyNet(DcmTagKey* tagKey)
-		:_tagKey(NULL)
-	{
-		_tagKey = tagKey;
-	}
+	internal:
 
-	DcmTagKey GetUnmanagedType()
-	{
-		return *_tagKey;
-	}
+		DcmTagKeyNet(DcmTagKey* tagKey)
+			:_tagKey(NULL)
+		{
+			_tagKey = tagKey;
+		}
 
-private:
+		DcmTagKey GetUnmanagedType()
+		{
+			return *_tagKey;
+		}
 
-	DcmTagKey* _tagKey;
+	private:
 
-	~DcmTagKeyNet()
-	{
-		this->!DcmTagKeyNet();
-	}
+		DcmTagKey* _tagKey;
 
-	!DcmTagKeyNet()
-	{
+		~DcmTagKeyNet()
+		{
+			this->!DcmTagKeyNet();
+		}
 
-	}
+		!DcmTagKeyNet()
+		{
 
-};
+		}
 
+	};
+}
