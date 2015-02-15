@@ -9,6 +9,7 @@
 #define INCLUDE_CSTDARG
 #include "dcmtk/ofstd/ofstdinc.h"
 
+#include "dcmtk/dcmdata/dctk.h"
 #include "dcmtk/dcmnet/dimse.h"
 #include "dcmtk/dcmnet/diutil.h"
 #include "dcmtk/dcmdata/dcfilefo.h"
@@ -17,81 +18,85 @@
 #include "dcmtk/dcmdata/cmdlnarg.h"
 #include "dcmtk/ofstd/ofconapp.h"
 #include "dcmtk/dcmdata/dcuid.h"      /* for dcmtk version name */
+#include "dcmtk/dcmnet/dfindscu.h"
 
-#include "dcmtk\dcmdata\dcdict.h"
+#include "dcmtk/dcmdata/dcdict.h"
 
-static OFLogger echoscuLogger = OFLog::getLogger("dcmtk.net.test");
+#include <iostream>
+
+static OFLogger findscuLogger = OFLog::getLogger("dcmtk.net.test");
+
+class DcmFindSCUmyCallback : public DcmFindSCUCallback
+{
+public:
+	DcmFindSCUmyCallback(){
+
+	}
+
+	virtual ~DcmFindSCUmyCallback() {}
+
+	virtual void callback(
+		T_DIMSE_C_FindRQ *request,
+		int responseCount,
+		T_DIMSE_C_FindRSP *rsp,
+		DcmDataset *responseIdentifiers)
+	{
+		int r;
+		r = responseCount;
+		std::cout << "responsecount:" << responseCount << "\n";
+		OFString string;
+		OFCondition cond = responseIdentifiers->findAndGetOFString(DCM_PatientName, string);
+		
+		OFBool result = cond.good();
+		std::cout << "patientname=" << string.c_str();
+	}
+};
 
 Test::Test()
 {
+	DcmFindSCU findscu;
 	OFString temp_str;
-	T_ASC_Network *net;
-	T_ASC_Parameters *params;
-	DIC_NODENAME localHost;
-	DIC_NODENAME peerHost;
+	OFList<OFString> overrideKeys;
+	OFList<OFString> fileNameList;
 
-	/* initialize network, i.e. create an instance of T_ASC_Network*. */
-	OFCondition cond = ASC_initializeNetwork(NET_REQUESTOR, 0, 3, &net);
+	OFCondition cond = findscu.initializeNetwork(30);
 	if (cond.bad()) {
-		OFLOG_FATAL(echoscuLogger, DimseCondition::dump(temp_str, cond));
-		exit(1);
+		OFLOG_ERROR(findscuLogger, DimseCondition::dump(temp_str, cond));
+		return;
 	}
 
-	/* initialize asscociation parameters, i.e. create an instance of T_ASC_Parameters*. */
-	cond = ASC_createAssociationParameters(&params, ASC_MAXIMUMPDUSIZE);
-	if (cond.bad()) {
-		OFLOG_FATAL(echoscuLogger, DimseCondition::dump(temp_str, cond));
-		exit(1);
-	}
+	overrideKeys.push_back(OFString("PatientName="));
 
-	/* sets this application's title and the called application's title in the params */
-	/* structure. The default values to be set here are "STORESCU" and "ANY-SCP". */
-	ASC_setAPTitles(params, "DRSHD", "MedXChange", NULL);
+	DcmFindSCUmyCallback callback;
 
-	/* Set the transport layer type (type of network connection) in the params */
-	/* strucutre. The default is an insecure connection; where OpenSSL is  */
-	/* available the user is able to request an encrypted,secure connection. */
-	cond = ASC_setTransportLayerType(params, false);
-	if (cond.bad()) {
-		OFLOG_FATAL(echoscuLogger, DimseCondition::dump(temp_str, cond));
-		exit(1);
-	}
+	// do the main work: negotiate network association, perform C-FIND transaction,
+	// process results, and finally tear down the association.
+	cond = findscu.performQuery(
+		"pacs.medxchange.com",
+		5678,
+		"DRSHD",
+		"MedXChange",
+		UID_FINDModalityWorklistInformationModel,
+		EXS_Unknown,
+		DIMSE_BLOCKING,
+		0,
+		ASC_MAXIMUMPDUSIZE,
+		OFFalse,
+		OFFalse,
+		1,
+		OFFalse,
+		-1,
+		&overrideKeys,
+		&callback,
+		NULL);
 
-	/* Figure out the presentation addresses and copy the */
-	/* corresponding values into the association parameters.*/
-	gethostname(localHost, sizeof(localHost) - 1);
-	sprintf(peerHost, "%s:%d", "pacs.medxchange.com", OFstatic_cast(int, 5678));
-	ASC_setPresentationAddresses(params, localHost, peerHost);
+	OFBool result = cond.bad();
 
-	const char* ts[] = { UID_LittleEndianImplicitTransferSyntax };
+	cond = findscu.dropNetwork();
+}
 
-	// add presentation context to association request
-	cond = ASC_addPresentationContext(params, 1, UID_VerificationSOPClass, ts, 1);
-	if (cond.bad()) {
-		OFLOG_FATAL(echoscuLogger, DimseCondition::dump(temp_str, cond));
-		exit(1);
-	}
 
-	// request DICOM association
-	T_ASC_Association *assoc;
-	cond = ASC_requestAssociation(net, params, &assoc);
-	if (cond.bad()) {
-		OFLOG_FATAL(echoscuLogger, DimseCondition::dump(temp_str, cond));
-		
-		if (cond == DUL_ASSOCIATIONREJECTED)
-		{
-			T_ASC_RejectParameters rej;
-			ASC_getRejectParameters(params, &rej);
-			ASC_printRejectParameters(temp_str, &rej);
-		}
-		else {
-			OFLOG_FATAL(echoscuLogger, "Association Request Failed: " << DimseCondition::dump(temp_str, cond));
-			exit(1);
-		}
-
-	}
-
-	ASC_releaseAssociation(assoc); // release association
-	ASC_destroyAssociation(&assoc); // delete assoc structure
-	ASC_dropNetwork(&net); // delete net structure
+int Test::TestFunction(std::string param)
+{
+	return 0;
 }

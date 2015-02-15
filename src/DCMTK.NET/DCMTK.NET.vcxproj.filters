@@ -24,6 +24,15 @@
     <ClInclude Include="Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DcmFindSCUNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OFConditionNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OFListNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -33,6 +42,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DcmFindSCUNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OFConditionNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OFListNet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
