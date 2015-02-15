@@ -82,10 +82,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DcmAssocNet.h" />
     <ClInclude Include="DcmDatasetNet.h" />
     <ClInclude Include="DcmFindSCUNet.h" />
     <ClInclude Include="DcmTagKeyNet.h" />
     <ClInclude Include="DcmTagsNet.h" />
+    <ClInclude Include="DcmTransferSyntaxNet.h" />
+    <ClInclude Include="DcmDimseNet.h" />
+    <ClInclude Include="DcmUIDNet.h" />
     <ClInclude Include="OFConditionNet.h" />
     <ClInclude Include="OFListNet.h" />
     <ClInclude Include="resource.h" />
@@ -94,10 +98,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="DcmAssocNet.cpp" />
     <ClCompile Include="DcmDatasetNet.cpp" />
     <ClCompile Include="DcmFindSCUNet.cpp" />
     <ClCompile Include="DcmTagKeyNet.cpp" />
     <ClCompile Include="DcmTagsNet.cpp" />
+    <ClCompile Include="DcmUIDNet.cpp" />
     <ClCompile Include="OFConditionNet.cpp" />
     <ClCompile Include="OFListNet.cpp" />
     <ClCompile Include="Stdafx.cpp">

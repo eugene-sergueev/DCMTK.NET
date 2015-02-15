@@ -35,8 +35,8 @@ OFConditionNet^ DcmFindSCUNet::PerformQuery(
 	System::String^ ourTitle,
 	System::String^ peerTitle,
 	System::String^ abstractSyntax,
-	E_TransferSyntax preferredTransferSyntax,
-	T_DIMSE_BlockingMode blockMode,
+	TransferSyntaxNet preferredTransferSyntax,
+	DIMSE_BlockingMode blockMode,
 	int dimse_timeout,
 	Uint32 maxReceivePDULength,
 	OFBool secureConnection,
@@ -58,6 +58,7 @@ OFConditionNet^ DcmFindSCUNet::PerformQuery(
 		{
 			System::IntPtr ptrToNativeString = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(key);
 			dcmtkOverrideKeys.push_back(static_cast<char*>(ptrToNativeString.ToPointer()));
+			System::Runtime::InteropServices::Marshal::FreeHGlobal(ptrToNativeString);
 		}
 	}
 
@@ -67,27 +68,38 @@ OFConditionNet^ DcmFindSCUNet::PerformQuery(
 		{
 			System::IntPtr ptrToNativeString = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(fileName);
 			dcmtkFileNameList.push_back(static_cast<char*>(ptrToNativeString.ToPointer()));
+			System::Runtime::InteropServices::Marshal::FreeHGlobal(ptrToNativeString);
 		}
 	}
 
+	System::IntPtr peerPtr = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(peer);
+	System::IntPtr ourTitlePtr = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(ourTitle);
+	System::IntPtr peerTitlePtr = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(peerTitle);
+	System::IntPtr abstractSyntaxPtr = System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(abstractSyntax);
+
 	OFCondition result = _findScu->performQuery(
-		"pacs.medxchange.com",
-		5678,
-		"DRSHD",
-		"MedXChange",
-		UID_FINDModalityWorklistInformationModel,
-		EXS_Unknown,
-		DIMSE_BLOCKING,
+		static_cast<char*>(peerPtr.ToPointer()),
+		port,
+		static_cast<char*>(ourTitlePtr.ToPointer()),
+		static_cast<char*>(peerTitlePtr.ToPointer()),
+		static_cast<char*>(abstractSyntaxPtr.ToPointer()),
+		(E_TransferSyntax)preferredTransferSyntax,
+		(T_DIMSE_BlockingMode)blockMode,
 		0,
-		ASC_MAXIMUMPDUSIZE,
-		OFFalse,
-		OFFalse,
-		1,
-		OFFalse,
-		-1,
+		maxReceivePDULength,
+		secureConnection,
+		abortAssociation,
+		repeatCount,
+		extractResponsesToFile,
+		cancelAfterNResponses,
 		&dcmtkOverrideKeys,
 		&dcmtkCallback,
 		&dcmtkFileNameList);
+
+	System::Runtime::InteropServices::Marshal::FreeHGlobal(peerPtr);
+	System::Runtime::InteropServices::Marshal::FreeHGlobal(ourTitlePtr);
+	System::Runtime::InteropServices::Marshal::FreeHGlobal(peerTitlePtr);
+	System::Runtime::InteropServices::Marshal::FreeHGlobal(abstractSyntaxPtr);
 
 	return gcnew OFConditionNet(result);
 }

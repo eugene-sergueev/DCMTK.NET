@@ -2,7 +2,8 @@
 
 #include "OFConditionNet.h"
 #include "DcmDatasetNet.h"
-
+#include "DcmTransferSyntaxNet.h"
+#include "DcmDimseNet.h"
 #include "dcmtk\dcmnet\dfindscu.h"
 
 public delegate void DcmFindSCUCallbackDelegate(int responseCount, DcmDatasetNet^ responseIdentifiers);
@@ -23,8 +24,8 @@ public:
 		System::String^ ourTitle,
 		System::String^ peerTitle,
 		System::String^ abstractSyntax,
-		E_TransferSyntax preferredTransferSyntax,
-		T_DIMSE_BlockingMode blockMode,
+		TransferSyntaxNet preferredTransferSyntax,
+		DIMSE_BlockingMode blockMode,
 		int dimse_timeout,
 		Uint32 maxReceivePDULength,
 		OFBool secureConnection,
