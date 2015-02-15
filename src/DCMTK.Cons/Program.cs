@@ -14,19 +14,41 @@ namespace DCMTK.Cons
             {
                 Do();
             }
-           
         }
 
         static void Do()
         {
             using (var find = new DcmFindSCUNet())
             {
-                using (var result = find.InitializeNetwork(30))
+                using (var initializeNetworkResult = find.InitializeNetwork(30))
                 {
-                    var good = result.Good();
-                    var text = result.Bad();
-                    var code = result.Code();
-                    var module = result.Module();
+                    if (initializeNetworkResult.Good())
+                    using (var queryResult = find.PerformQuery("peer",
+                            234, 
+                            "outtite", 
+                            "peertite", 
+                            "abstract syntax", 
+                            0, 
+                            0,
+                            0,
+                            0, 
+                            false,
+                            false,
+                            0,
+                            false, 0, new List<string> {"PatientName"}, (count, identifiers) =>
+                            {
+                                string patientName = null;
+                                var getresult = identifiers.FindAndGetString(DcmTagKeyNet.PatientName, ref patientName);
+                                if (getresult.Good())
+                                {
+                                    Console.WriteLine("Patient name = " + patientName);
+                                }
+
+                            }, 
+                            new List<string>()))
+                    {
+
+                    }
                 }
             }
         }

@@ -1,10 +1,11 @@
 #pragma once
 
 #include "OFConditionNet.h"
+#include "DcmDatasetNet.h"
 
 #include "dcmtk\dcmnet\dfindscu.h"
 
-ref struct PrivateManaged;
+public delegate void DcmFindSCUCallbackDelegate(int responseCount, DcmDatasetNet^ responseIdentifiers);
 
 public ref class DcmFindSCUNet
 {
@@ -15,6 +16,25 @@ public:
 	}
 
 	OFConditionNet^ InitializeNetwork(int acse_timeout);
+
+	OFConditionNet^ PerformQuery(
+		System::String^ peer,
+		unsigned int port,
+		System::String^ ourTitle,
+		System::String^ peerTitle,
+		System::String^ abstractSyntax,
+		E_TransferSyntax preferredTransferSyntax,
+		T_DIMSE_BlockingMode blockMode,
+		int dimse_timeout,
+		Uint32 maxReceivePDULength,
+		OFBool secureConnection,
+		OFBool abortAssociation,
+		unsigned int repeatCount,
+		OFBool extractResponsesToFile,
+		int cancelAfterNResponses,
+		System::Collections::Generic::List<System::String^>^ overrideKeys,
+		DcmFindSCUCallbackDelegate^ callback,
+		System::Collections::Generic::List<System::String^>^ fileNameList);
 
 private:
 	DcmFindSCU* _findScu;

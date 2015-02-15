@@ -33,6 +33,15 @@
     <ClInclude Include="OFListNet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DcmDatasetNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DcmTagsNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DcmTagKeyNet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -51,6 +60,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OFListNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DcmDatasetNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DcmTagsNet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DcmTagKeyNet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

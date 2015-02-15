@@ -60,6 +60,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NOENTRY %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,6 +73,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>NETAPI32.lib;WSOCK32.lib;zlib_o.lib;libtiff_o.lib;dcmtkeay_o.lib;dcmtkssl_o.lib;dcmtssl_o.lib;iconv_o.lib;libxml2_o.lib;libpng_o.lib;ijg8.lib;ijg12.lib;ijg16.lib;libi2d.lib;ofstd.lib;oflog.lib;charls.lib;dcmdata.lib;dcmdsig.lib;dcmimage.lib;dcmimgle.lib;dcmjpeg.lib;dcmjpls.lib;dcmnet.lib;dcmpstat.lib;dcmqrdb.lib;dcmsr.lib;dcmtls.lib;dcmwlm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NOENTRY %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -80,7 +82,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DcmDatasetNet.h" />
     <ClInclude Include="DcmFindSCUNet.h" />
+    <ClInclude Include="DcmTagKeyNet.h" />
+    <ClInclude Include="DcmTagsNet.h" />
     <ClInclude Include="OFConditionNet.h" />
     <ClInclude Include="OFListNet.h" />
     <ClInclude Include="resource.h" />
@@ -89,7 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="DcmDatasetNet.cpp" />
     <ClCompile Include="DcmFindSCUNet.cpp" />
+    <ClCompile Include="DcmTagKeyNet.cpp" />
+    <ClCompile Include="DcmTagsNet.cpp" />
     <ClCompile Include="OFConditionNet.cpp" />
     <ClCompile Include="OFListNet.cpp" />
     <ClCompile Include="Stdafx.cpp">
