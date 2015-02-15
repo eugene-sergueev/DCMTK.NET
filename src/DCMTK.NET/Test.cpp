@@ -91,17 +91,6 @@ Test::Test()
 
 	}
 
-	if(ASC_countAcceptedPresentationContexts(params) == 1)
-	{
-		// the remote SCP has accepted the Verification Service Class
-		DIC_US id = assoc->nextMsgID++; // generate next message ID
-		DIC_US status; // DIMSE status of C-ECHO-RSP will be stored here
-		DcmDataset *sd = NULL; // status detail will be stored here
-		// send C-ECHO-RQ and handle response
-		DIMSE_echoUser(assoc, id, DIMSE_BLOCKING, 0, &status, &sd);
-		delete sd; // we don't care about status detail
-	}
-
 	ASC_releaseAssociation(assoc); // release association
 	ASC_destroyAssociation(&assoc); // delete assoc structure
 	ASC_dropNetwork(&net); // delete net structure
