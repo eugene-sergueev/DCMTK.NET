@@ -39,6 +39,7 @@ namespace DCMTK
 			DcmFindSCUCallbackDelegate^ callback,
 			System::Collections::Generic::List<System::String^>^ fileNameList);
 
+		System::Collections::Generic::List<System::Collections::Generic::Dictionary<System::String^, System::String^>^>^ QueryWorklist(System::String^ host, int port, System::String^ callingAE, System::String^ calledAE, System::String^ patientId, System::String^ modality, System::String^ scheduledAETitle, System::String^ startDate);
 	private:
 		DcmFindSCU* _findScu;
 
