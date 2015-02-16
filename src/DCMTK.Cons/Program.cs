@@ -12,8 +12,89 @@ namespace DCMTK.Cons
         {
             while (true)
             {
-                Do();
+                Do2();
             }
+        }
+
+        static void Do2()
+        {
+            using (var find = new DcmFindSCUNet())
+            {
+                using (var cond = find.InitializeNetwork(5))
+                {
+                    if (cond.Bad())
+                        throw new Exception("Couldn't initialize network connection. " + cond.Text());
+                }
+
+                using (var cond = find.PerformQuery("pacs.medxchange.com",
+                    (uint)5678,
+                    "DRSHD",
+                    "MedXChange",
+                    DcmUIDNet.FINDModalityWorklistInformationModel,
+                    TransferSyntaxNet.Unknown,
+                    DIMSE_BlockingMode.DIMSE_BLOCKING,
+                    0,
+                    DcmAssocNet.ASC_MAXIMUMPDUSIZE_NET,
+                    false,
+                    false,
+                    1,
+                    false,
+                    -1,
+                    new List<string>
+                        {
+                            //"ScheduledPerformingPhysicianName",
+                            "PatientName="
+                            //"PatientID=" + patientId,
+                            //"StudyInstanceUID",
+                            //"AccessionNumber",
+                            //"ScheduledProcedureStepSequence[0].ScheduledStationAETitle=" + filteringAeTitle,
+                            //"ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartDate=" + dateFilter,
+                            //"ScheduledProcedureStepSequence[0].ScheduledProcedureStepStartTime",
+                            //"ScheduledProcedureStepSequence[0].Modality=" + modality,
+                            //"ScheduledProcedureStepSequence[0].ScheduledStationName",
+                            //"ReferringPhysicianName",
+                            //"PatientBirthDate",
+                            //"PatientSex",
+                            //"RequestedProcedureID",
+                            //"RequestedProcedureDescription"
+                        },
+                    (count, dataSet) =>
+                    {
+                       
+                        var patientName = GetStringFromDataSet(dataSet, DcmTagKeyNet.PatientName, null);
+                        Console.WriteLine(patientName);
+
+                        var getresult = dataSet.FindAndGetString(DcmTagKeyNet.PatientName, 0, true, out patientName);
+                        if (getresult.Good())
+                        {
+                            Console.WriteLine("patientName = " + patientName);
+                        }
+                        else
+                        {
+                            Console.WriteLine("patientName error = " + getresult.Text());
+                        }
+
+                    },
+                    new List<string>()))
+                {
+                    if (cond.Bad())
+                        throw new Exception("Couldn't connect to MWL server. " + cond.Text());
+                }
+            }
+        }
+
+        private static string GetStringFromDataSet(DcmDatasetNet dataSet, DcmTagKeyNet tag, string defaultValue)
+        {
+            string result;
+            using (var cond = dataSet.FindAndGetString(DcmTagKeyNet.PatientName, 0, true, out result))
+            {
+                if (cond.Bad())
+                {
+                    var text = cond.Text();
+                    result = defaultValue;
+                }
+            }
+            return result;
         }
 
         static void Do()
